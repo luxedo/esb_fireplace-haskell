@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE LambdaCase          #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module Fireplace
@@ -6,8 +6,8 @@ module Fireplace
   )
 where
 
-import Data.Typeable
-import Options.Applicative
+import           Data.Typeable
+import           Options.Applicative
 
 data Part = One | Two
   deriving (Eq, Ord, Show, Read, Bounded)

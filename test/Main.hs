@@ -1,5 +1,5 @@
-import Test.Tasty
-import Test.Tasty.HUnit
+import           Test.Tasty
+import           Test.Tasty.HUnit
 
 main :: IO ()
 main = defaultMain tests

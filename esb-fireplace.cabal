@@ -3,7 +3,7 @@ name:            esb-fireplace
 version:         0.1.0.0
 license:         AGPL-3.0-or-later
 license-file:    LICENSE
-maintainer:      luizamaral306@gmail.com
+maintainer:      luizamaral306 @gmail.com
 author:          Luiz Eduardo Amaral
 synopsis:
     The FIREPLACEv1.0 allows the use of the `esb` tooling for solving Advent of Code problems.
