@@ -1,6 +1,10 @@
+-- | Documentation for `EsbFireplace`.
+--  The FIREPLACEv1.0 allows the use of the `esb` tooling for solving Advent of Code problems.
+--  This is an implementation of FIREPLACEv1.0 for Elixir.
+--
+--  Check [esb](https://github.com/luxedo/esb) for more information.
 {-# LANGUAGE LambdaCase          #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-
 module Fireplace (
   v1Run,
 )
@@ -52,6 +56,7 @@ opts =
         <> progDesc "Elf Script Brigade Haskell solution runner"
     )
 
+-- | Runs solutions given solution functions.
 v1Run ::
   (Show r1, Typeable r1, Show r2, Typeable r2) =>
   (String -> [String] -> r1) ->

@@ -18,7 +18,7 @@ in your `.cabal` file:
 
 ## Usage
 
-Create your solution functions and add `esb_fireplace.V1Run` to `main`.
+Create your solution functions and add `V1Run` to `main`.
 
 ```haskell
 module Main where
