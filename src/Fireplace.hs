@@ -1,27 +1,28 @@
 {-# LANGUAGE LambdaCase          #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-module Fireplace
-  ( v1Run,
-  )
+module Fireplace (
+  v1Run,
+)
 where
 
+import           Data.Time.Clock
 import           Data.Typeable
 import           Options.Applicative
 
 data Part = One | Two
   deriving (Eq, Ord, Show, Read, Bounded)
 
+data Arguments = Arguments
+  { part :: Part
+  , args :: [String]
+  }
+
 parsePart :: ReadM Part
 parsePart = eitherReader $ \case
   "1" -> Right One
   "2" -> Right Two
   _ -> Left "Part must be 1 or 2"
-
-data Arguments = Arguments
-  { part :: Part,
-    args :: [String]
-  }
 
 parser :: Parser Arguments
 parser =
@@ -39,8 +40,7 @@ parser =
                 <> help "Additional arguments for running the solutions"
             )
             *> many
-              ( strArgument (metavar "ARGS")
-              )
+              (strArgument (metavar "ARGS"))
               <|> pure []
         )
 
@@ -53,15 +53,23 @@ opts =
     )
 
 v1Run ::
-  (Show ret, Typeable ret) =>
-  (String -> [String] -> IO ret) ->
-  (String -> [String] -> IO ret) ->
+  (Show r1, Typeable r1, Show r2, Typeable r2) =>
+  (String -> [String] -> r1) ->
+  (String -> [String] -> r2) ->
   IO ()
 v1Run solvePt1 solvePt2 = do
-  Arguments {part, args} <- execParser opts
+  Arguments{part, args} <- execParser opts
   input <- getContents
-  let solver = case part of
-        One -> solvePt1
-        Two -> solvePt2
-  result <- solver input args
-  maybe (print result) putStrLn (cast result)
+  start <- getCurrentTime
+  putStrLn $ case part of
+    One -> renderAny $ solvePt1 input args
+    Two -> renderAny $ solvePt2 input args
+  end <- getCurrentTime
+  let duration = diffUTCTime end start
+      ns = round (realToFrac duration * 1e9 :: Double) :: Int
+  putStrLn $ "RT " ++ show ns ++ " ns"
+ where
+  renderAny :: (Typeable r, Show r) => r -> String
+  renderAny val = case cast val :: Maybe String of
+    Just s  -> s
+    Nothing -> show val

@@ -11,32 +11,31 @@ repos:
       - id: stylish-haskell
         name: stylish-haskell
         entry: stylish-haskell --inplace
-        language: haskell
+        language: system
         types: [haskell]
-        additional_dependencies: [stylish-haskell]
-        verbose: true
       - id: hlint
         name: hlint
         entry: hlint
         language: haskell
         types: [haskell]
         additional_dependencies: [hlint]
-        verbose: true
       - id: build
         name: build
         entry: cabal build
         language: system
-        verbose: true
         pass_filenames: false
       - id: test
         name: test
         entry: cabal test
         language: system
-        verbose: true
         pass_filenames: false
       - id: format-cabal
         name: format-cabal
         entry: cabal format
         language: system
-        verbose: true
+        pass_filenames: false
+      - id: cabal-check
+        name: cabal-check
+        entry: cabal check
+        language: system
         pass_filenames: false

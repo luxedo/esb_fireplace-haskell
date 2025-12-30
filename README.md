@@ -8,62 +8,53 @@ Check [esb](https://github.com/luxedo/esb) for more information.
 
 ## Installation
 
-# TODO: this!
-The package can be installed by adding `esb_fireplace-go` to your list of dependencies in `go.mod`:
+The package can be installed by adding `esb-fireplace` to your dependencies
+in your `.cabal` file:
 
-```mod
-require github.com/luxedo/esb_fireplace-go v1.0.0
-```
-
-or by running:
-
-```bash
-go get github.com/luxedo/esb_fireplace-go
+```cabal
+    build-depends:
+        esb-fireplace
 ```
 
 ## Usage
 
 Create your solution functions and add `esb_fireplace.V1Run` to `main`.
 
-```go
-package main
+```haskell
+module Main where
 
-import (
-  "github.com/luxedo/esb_fireplace-go"
-)
+import Fireplace
 
-func SolvePt1(inputData string, args []string) (interface{}, error) {
-	return 25, nil
-}
+solvePt1 :: String -> [String] -> Int
+solvePt1 input _args = do
+  25
 
+solvePt2 :: String -> [String] -> String
+solvePt2 input _args = do
+  "December"
 
-func SolvePt2(inputData string, args []string) (interface{}, error) {
-	return "December", nil
-}
-
-func main() {
-  // 🎅🎄❄️☃️🎁🦌
-  // Bright christmas lights HERE
-  esb_fireplace.V1Run(SolvePt1, SolvePt2)
-}
+main :: IO ()
+main = do
+  -- 🎅🎄❄️☃️🎁🦌
+  -- Bright Christmas lights HERE
+  v1Run solvePt1 solvePt2
 ```
 
-Running can be done with `go run`, but this library is meant to be used with [esb](https://github.com/luxedo/esb).
+Running can be done with `cabal run`, but this library is meant to be used with
+[esb](https://github.com/luxedo/esb).
 
 ```bash
 # You can do this...
-go run . --part 1 < inputData.txt
+cabal run . --- --part 1 < inputData.txt
 
 # But instead do this:
-esb run --year 2023 --day 1 --lang rust --part 1
+esb run --year 2023 --day 1 --lang haskell --part 1
 ```
-
-The docs can be found at <https://pkg.go.dev/github.com/luxedo/esb_fireplace-go/>.
 
 ## License
 
 > ESB - Script your way to rescue Christmas as part of the ElfScript Brigade team.
-> Copyright (C) 2024 Luiz Eduardo Amaral <luizamaral306@gmail.com>
+> Copyright (C) 2025 Luiz Eduardo Amaral <luizamaral306@gmail.com>
 >
 > This program is free software: you can redistribute it and/or modify
 > it under the terms of the GNU General Public License as published by
